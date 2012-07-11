@@ -1,7 +1,8 @@
-<<<<<<< HEAD
-#Wed Jul 11 13:54:56 EDT 2012
-=======
->>>>>>> aa876541b6f866eae54ca191512d4124b77381ce
+#Wed Jul 11 14:49:29 EDT 2012
+=\=\=\=\=\=\=
+<<<<<<<=HEAD
+>>>>>>>=aa876541b6f866eae54ca191512d4124b77381ce
 eclipse.preferences.version=1
+jarsExcludedFromWebInfLib=
 warSrcDir=war
 warSrcDirIsOutput=true
