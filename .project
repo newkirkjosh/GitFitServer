@@ -21,14 +21,11 @@
 			</arguments>
 		</buildCommand>
 		<buildCommand>
-<<<<<<< HEAD
-=======
 			<name>com.google.gwt.eclipse.core.gwtProjectValidator</name>
 			<arguments>
 			</arguments>
 		</buildCommand>
 		<buildCommand>
->>>>>>> aa876541b6f866eae54ca191512d4124b77381ce
 			<name>com.google.appengine.eclipse.core.gaeProjectChangeNotifier</name>
 			<arguments>
 			</arguments>
@@ -47,10 +44,7 @@
 	<natures>
 		<nature>org.eclipse.jdt.core.javanature</nature>
 		<nature>com.google.appengine.eclipse.core.gaeNature</nature>
-<<<<<<< HEAD
-=======
 		<nature>com.google.gwt.eclipse.core.gwtNature</nature>
->>>>>>> aa876541b6f866eae54ca191512d4124b77381ce
 		<nature>org.eclipse.wst.common.project.facet.core.nature</nature>
 	</natures>
 </projectDescription>
