@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <appengine-web-app xmlns="http://appengine.google.com/ns/1.0">
-  <application></application>
+  <application>gitfittemp</application>
   <version>1</version>
 
   <!--
@@ -8,8 +8,6 @@
   -->
   <threadsafe>true</threadsafe>
 
-<<<<<<< HEAD
-=======
   <!-- Configure serving/caching of GWT files -->
   <static-files>
     <include path="**" />
@@ -21,7 +19,6 @@
     <exclude path="**.gwt.rpc" />
   </static-files>
 
->>>>>>> aa876541b6f866eae54ca191512d4124b77381ce
   <!-- Configure java.util.logging -->
   <system-properties>
     <property name="java.util.logging.config.file" value="WEB-INF/logging.properties"/>

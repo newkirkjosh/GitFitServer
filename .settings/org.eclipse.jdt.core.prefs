@@ -1,11 +1,15 @@
-<<<<<<< HEAD
-#Wed Jul 11 13:54:57 EDT 2012
-=======
->>>>>>> aa876541b6f866eae54ca191512d4124b77381ce
+#Fri Jul 13 08:57:26 EDT 2012
+=\=\=\=\=\=\=
+<<<<<<<=HEAD
+>>>>>>>=aa876541b6f866eae54ca191512d4124b77381ce
 eclipse.preferences.version=1
 org.eclipse.jdt.core.compiler.codegen.inlineJsrBytecode=enabled
 org.eclipse.jdt.core.compiler.codegen.targetPlatform=1.6
+org.eclipse.jdt.core.compiler.codegen.unusedLocal=preserve
 org.eclipse.jdt.core.compiler.compliance=1.6
+org.eclipse.jdt.core.compiler.debug.lineNumber=generate
+org.eclipse.jdt.core.compiler.debug.localVariable=generate
+org.eclipse.jdt.core.compiler.debug.sourceFile=generate
 org.eclipse.jdt.core.compiler.problem.assertIdentifier=error
 org.eclipse.jdt.core.compiler.problem.enumIdentifier=error
 org.eclipse.jdt.core.compiler.source=1.6
