@@ -33,7 +33,8 @@ public class GFRegistrationServlet extends HttpServlet {
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp)
 			throws ServletException, IOException {
-		doPost(req, resp);
+		resp.setContentType("text/plain");
+		resp.getWriter().println("FUCKCKCKCKCKCKCKCKCCKCKCKCKTHIISSSSSSSHITIITITITITIT");
 	}
 
 	@Override
@@ -52,7 +53,7 @@ public class GFRegistrationServlet extends HttpServlet {
 			datastore = DatastoreServiceFactory.getDatastoreService();
 			datastore.put(userEntity);
 		}
-		resp.addIntHeader("validation", validationCheck);
+		resp.addHeader("xValidation", String.valueOf(validationCheck));
 	}
 
 	private int validateUserRegistration(User user){
