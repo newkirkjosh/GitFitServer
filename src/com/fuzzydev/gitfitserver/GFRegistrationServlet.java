@@ -1,9 +1,11 @@
 package com.fuzzydev.gitfitserver;
 
+import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -16,6 +18,7 @@ import com.google.appengine.api.datastore.Entity;
 import com.google.appengine.api.datastore.FetchOptions;
 import com.google.appengine.api.datastore.KeyFactory;
 import com.google.appengine.api.datastore.Key;
+import com.google.appengine.api.datastore.PreparedQuery;
 import com.google.appengine.api.datastore.Query;
 import com.google.gson.Gson;
 import com.sun.xml.internal.bind.v2.runtime.reflect.ListIterator;
@@ -41,16 +44,27 @@ public class GFRegistrationServlet extends HttpServlet {
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp)
 			throws ServletException, IOException {
 
-		String jsonData = req.getParameter("userData");
-		Gson gson = new Gson();
-		User user = gson.fromJson(jsonData, User.class);
-
-		Entity userEntity = new Entity(user.getEmail(),"user");
-		mapUserPropertiesToEntityFromUser(userEntity,user);
+		 StringBuffer jsonData = new StringBuffer();
+		  String line = null;
+		  try {
+		    BufferedReader reader = req.getReader();
+		    while ((line = reader.readLine()) != null)
+		      jsonData.append(line);
+		  } catch (Exception e) {
+		}
+		  
+		datastore = DatastoreServiceFactory.getDatastoreService();
+  
+		log.info(jsonData.toString());
 		
-		int validationCheck = validateUserRegistration(user);
+		Gson gson = new Gson();
+
+		User newUser = gson.fromJson(jsonData.toString(),User.class);
+		Entity userEntity = new Entity("user",newUser.getEmail());
+		mapUserPropertiesToEntityFromUser(userEntity,newUser);
+		
+		int validationCheck = validateUserRegistration(newUser);
 		if(validationCheck == VALID_REGISTRATION){
-			datastore = DatastoreServiceFactory.getDatastoreService();
 			datastore.put(userEntity);
 		}
 		resp.addHeader("xValidation", String.valueOf(validationCheck));
@@ -58,25 +72,24 @@ public class GFRegistrationServlet extends HttpServlet {
 
 	private int validateUserRegistration(User user){
 		Query query = new Query("user");
-	    List<Entity> existingUsers  = new ArrayList<Entity>();
-	    existingUsers = datastore.prepare(query).asList(null);
-	    
-	    if(!existingUsers.isEmpty()){
-	    	for(Entity temp : existingUsers){
-	    		if(user.getID() == temp.getProperty("id")){
-	    			return USER_ID_ALREADY_EXISTS;    		}
-	    		if(user.getEmail() == temp.getProperty("email")){
-	    			return USER_EMAIL_ALREADY_REGISTERED;
-	    		}
-	    	}
-	    }
+	  
+		PreparedQuery pq = datastore.prepare(query);
+
+		for (Entity result : pq.asIterable()) {
+			if(user.getID().equalsIgnoreCase(result.getProperty("id").toString())){
+				log.info("here");
+    			return USER_ID_ALREADY_EXISTS;    		
+    			}
+    		if(user.getEmail().equalsIgnoreCase(result.getProperty("email").toString())){
+    			return USER_EMAIL_ALREADY_REGISTERED;
+    		}
+		}
+	   
 		return VALID_REGISTRATION;
 	}
 	private void mapUserPropertiesToEntityFromUser(Entity userEntity, User user) {
 		userEntity.setProperty("firstName",
 				user.getFirstName() != null ? user.getFirstName() : "");
-		userEntity.setProperty("lastName",
-				user.getLastName() != null ? user.getLastName() : "");
 		userEntity.setProperty("userType",
 				user.getUserType() != null ? user.getUserType() : "");
 		userEntity.setProperty("email",
@@ -94,10 +107,6 @@ public class GFRegistrationServlet extends HttpServlet {
 
 		User() {// No-Arg-Constructor
 
-		}
-
-		public User(String firstName) {
-			this.firstName = firstName;
 		}
 
 		public String getID() {
@@ -122,14 +131,6 @@ public class GFRegistrationServlet extends HttpServlet {
 
 		public void setFirstName(String firstName) {
 			this.firstName = firstName;
-		}
-
-		public String getLastName() {
-			return lastName;
-		}
-
-		public void setLastName(String lastName) {
-			this.lastName = lastName;
 		}
 
 		public String getEmail() {
