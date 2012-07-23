@@ -8,6 +8,14 @@
     <servlet-name>GFRegistrationServlet</servlet-name>
     <url-pattern>/gfregistrationservlet</url-pattern>
   </servlet-mapping>
+     <security-constraint>
+        <web-resource-collection>
+            <url-pattern>/gfregistrationservlet</url-pattern>
+        </web-resource-collection>
+        <user-data-constraint>
+            <transport-guarantee>CONFIDENTIAL</transport-guarantee>
+        </user-data-constraint>
+    </security-constraint>
   <welcome-file-list>
 	<welcome-file>index.html</welcome-file>
   </welcome-file-list>

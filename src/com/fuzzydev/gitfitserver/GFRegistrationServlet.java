@@ -37,7 +37,7 @@ public class GFRegistrationServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp)
 			throws ServletException, IOException {
 		resp.setContentType("text/plain");
-		resp.getWriter().println("FUCKCKCKCKCKCKCKCKCCKCKCKCKTHIISSSSSSSHITIITITITITIT");
+		resp.getWriter().println("TEST");
 	}
 
 	@Override
