@@ -32,7 +32,6 @@ public class GFRegistrationServlet extends HttpServlet {
 	private static final int USER_EMAIL_ALREADY_REGISTERED = 2;
 	private static final int VALID_REGISTRATION = 0;
 	
-
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp)
 			throws ServletException, IOException {
@@ -79,12 +78,11 @@ public class GFRegistrationServlet extends HttpServlet {
 			if(user.getID().equalsIgnoreCase(result.getProperty("id").toString())){
 				log.info("here");
     			return USER_ID_ALREADY_EXISTS;    		
-    			}
+    		}
     		if(user.getEmail().equalsIgnoreCase(result.getProperty("email").toString())){
     			return USER_EMAIL_ALREADY_REGISTERED;
     		}
-		}
-	   
+		}	   
 		return VALID_REGISTRATION;
 	}
 	private void mapUserPropertiesToEntityFromUser(Entity userEntity, User user) {
@@ -103,6 +101,7 @@ public class GFRegistrationServlet extends HttpServlet {
 		private String userType;
 		private String firstName;
 		private String lastName;
+		private String password;
 		private String email;
 
 		User() {// No-Arg-Constructor
@@ -115,6 +114,14 @@ public class GFRegistrationServlet extends HttpServlet {
 
 		public void setID(String iD) {
 			ID = iD;
+		}
+		
+		public void setPassword(String password){
+			this.password = password;
+		}
+		
+		public String getPassword(){
+			return this.password;
 		}
 
 		public String getUserType() {
